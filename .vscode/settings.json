@@ -5,7 +5,7 @@
         "editor.wordBasedSuggestions": "allDocuments",
         "editor.codeActionsOnSave": {
             "source.fixAll": "always",
-            "source.organizeImports": true
+            "source.organizeImports": "explicit"
         },
         "editor.formatOnSave": true,
         "editor.defaultFormatter": "charliermarsh.ruff"
