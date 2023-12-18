@@ -1,10 +1,12 @@
 import re
+
 try:
     from .vulnerabilities import definitions
 except:
     from vulnerabilities import definitions
 
 import hashlib
+
 import requests
 
 
