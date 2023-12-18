@@ -1,0 +1,23 @@
+{
+    "[python]": {
+        "diffEditor.ignoreTrimWhitespace": false,
+        "editor.formatOnType": true,
+        "editor.wordBasedSuggestions": "allDocuments",
+        "editor.codeActionsOnSave": {
+            "source.fixAll": "always",
+            "source.organizeImports": true
+        },
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "charliermarsh.ruff"
+    },
+    "cSpell.words": [
+        "extanalysis",
+        "nobrowser",
+        "Tuhinshubhra",
+        "updatelog",
+        "viewfile",
+        "viewresult",
+        "viewsource",
+        "werkzeug"
+    ]
+}
