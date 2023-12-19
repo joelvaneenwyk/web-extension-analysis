@@ -13,3 +13,4 @@ extanalysis.log
 .venv
 .idea/
 venv
+.mypy_cache/

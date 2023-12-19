@@ -16,14 +16,17 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
-import core.core as core
-import core.scans as scan
-import logging, traceback
-import core.helper as helper
+import logging
 import os
+import subprocess
 import sys
 import tempfile
-import subprocess
+import traceback
+
+import core.core as core
+import core.helper as helper
+import core.scans as scan
+
 
 def check():
     '''
@@ -56,7 +59,7 @@ def check():
             else:
                 print('The script was tampered with and i don\'t like it!')
                 core.handle_exit()
-        except Exception as e:
+        except Exception:
             core.updatelog('Invalid response from github')
             logging.error(traceback.format_exc())
             core.handle_exit()

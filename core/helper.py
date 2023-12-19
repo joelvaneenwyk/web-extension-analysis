@@ -18,8 +18,16 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import os
 
+
 def escape(html):
-    return(html.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;').replace('"', '&quot;').replace("'", '&#39;'))
+    return (
+        html.replace("&", "&amp;")
+        .replace("<", "&lt;")
+        .replace(">", "&gt;")
+        .replace('"', "&quot;")
+        .replace("'", "&#39;")
+    )
+
 
 def fixpath(path):
     # i have a bad issue of hardcoding path this saves some troubles

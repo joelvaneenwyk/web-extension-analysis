@@ -16,13 +16,17 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
+import base64
+import json
+import logging
+import os
+import traceback
+
+from flask import render_template, url_for
+
 import core.core as core
 import core.helper as helper
-import os
-import json
-from flask import Flask, request, render_template, redirect, url_for, send_from_directory
-import logging, traceback
-import base64
+
 
 def view(analysis_id):
     # so the result ids are in this format : EXA<some digits> so we can try to replace 'EXTA' and convert the rest to int if it passes it's a valid type
@@ -30,7 +34,7 @@ def view(analysis_id):
         int(analysis_id.replace('EXA','')) # Check
 
         analysis_info = core.get_result_info(analysis_id)
-        
+
         if not analysis_info[0]:
             # Could not get analysis_info
             error_txt = 'Something went wrong while getting analysis info!<br>Error: ' + analysis_info[1]
@@ -55,13 +59,13 @@ def view(analysis_id):
                     report_data = json.loads(report_data.read())
 
                     # prepare data to be sent to result page
-                    basic_info_t = [report_data['name'], 
-                                    report_data['version'], 
-                                    report_data['author'], 
+                    basic_info_t = [report_data['name'],
+                                    report_data['version'],
+                                    report_data['author'],
                                     report_data['description'],
                                     analysis_info[1]['time']
                                     ]
-                    
+
                     # extension type
                     extension_type = report_data['type']
                     if 'firefox' in extension_type.lower():
@@ -128,7 +132,7 @@ def view(analysis_id):
                         domains_table = '<h3 class="nothing"> No Domains Extracted! </h3>'
                     unique_domains = len(report_data['domains'])
 
-                        
+
                     # Permissions div containing all permissions accordions
                     permissions_div = ""
                     for perm in report_data['permissions']:
@@ -226,13 +230,13 @@ def view(analysis_id):
                     static_files_count = len(report_data['files']['static'])
 
                     return render_template("report.html",
-                                            extension_type = extension_type, 
-                                            graph_data = graph_data, 
-                                            basic_info = basic_info_t, 
-                                            urls_table = urls_table, 
-                                            permissions_div = permissions_div, 
-                                            analysis_id=analysis_id, 
-                                            files_table=files_table, 
+                                            extension_type = extension_type,
+                                            graph_data = graph_data,
+                                            basic_info = basic_info_t,
+                                            urls_table = urls_table,
+                                            permissions_div = permissions_div,
+                                            analysis_id=analysis_id,
+                                            files_table=files_table,
                                             manifest_content=manifest_content,
                                             domains_table = domains_table,
                                             base64_table = base64_table,
@@ -252,17 +256,17 @@ def view(analysis_id):
                                             other_files_count = other_files_count,
                                             static_files_count = static_files_count
                                         )
-                
-                
+
+
                 else:
                     error_txt = 'All the result files are not found.. Try scanning the extension again! and don\'t mess with the result files this time'
                     return render_template('error.html', error_title = "Malformed Result", error_head = "Incomplete Result", error_txt=error_txt)
-           
-           
+
+
             else:
                 error_txt = 'The result directory corresponding to result id {0} could not be found... hence ExtAnalysis has nothing to show'.format(analysis_id)
                 return render_template('error.html', error_title = "Result Directory Not Found", error_head = "Result Directory Not Foundt", error_txt=error_txt)
-    
+
     except:
         logging.error(traceback.format_exc())
         return render_template('error.html', error_title = "Invalid Result ID", error_head = "Invalid Result ID" , error_txt='There seems to be no result corresponding to the provided ID. Did you delete the result? or maybe you did some weird shit with the parameter?')

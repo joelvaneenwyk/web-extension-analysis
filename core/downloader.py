@@ -16,10 +16,12 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
+import re
 import urllib.request
+
 import core.core as core
 import core.helper as helper
-import re
+
 
 def download(id, name=""):
     ext_id = id
@@ -27,11 +29,15 @@ def download(id, name=""):
         save_name = ext_id
     else:
         save_name = name
-    save_path = helper.fixpath(core.lab_path + '/' + save_name + '.crx')
+    save_path = helper.fixpath(core.lab_path + "/" + save_name + ".crx")
     core.updatelog("Downloader says: save_path is " + save_path)
     # dl_url = "https://clients2.google.com/service/update2/crx?response=redirect&x=id%3D" + ext_id + "%26uc&prodversion=32"
     # new download URL, issue #13
-    dl_url = "https://clients2.google.com/service/update2/crx?response=redirect&os=win&arch=x86-64&os_arch=x86-64&nacl_arch=x86-64&prod=chromecrx&prodchannel=unknown&prodversion=81.0.4044.138&acceptformat=crx2,crx3&x=id%3D" + ext_id + "%26uc"
+    dl_url = (
+        "https://clients2.google.com/service/update2/crx?response=redirect&os=win&arch=x86-64&os_arch=x86-64&nacl_arch=x86-64&prod=chromecrx&prodchannel=unknown&prodversion=81.0.4044.138&acceptformat=crx2,crx3&x=id%3D"
+        + ext_id
+        + "%26uc"
+    )
     print("Download URL: " + dl_url)
 
     try:
@@ -43,21 +49,28 @@ def download(id, name=""):
         print(e)
         return False
 
+
 def downloadFirefox(url):
-    if 'addons.mozilla.org' not in url:
-        core.updatelog('Invalid Firefox addon URL')
+    if "addons.mozilla.org" not in url:
+        core.updatelog("Invalid Firefox addon URL")
         return False
     else:
         try:
             test = urllib.request.Request(url)
-            test.add_header('User-Agent', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:66.0) Gecko/20100101 Firefox/66.0')
+            test.add_header(
+                "User-Agent",
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:66.0) Gecko/20100101 Firefox/66.0",
+            )
             source = urllib.request.urlopen(test)
-            source_code = source.read().decode('utf-8')
-            xpi_file = re.findall('<a class="Button Button--action AMInstallButton-button Button--puffy" href="(.*?).xpi?', source_code)[0]
-            core.updatelog('Found link for xpi file: ' + xpi_file + '.xpi')
-            name = xpi_file.split('/')[-1]
-            xpi_file += '.xpi'
-            save_path = helper.fixpath(core.lab_path + '/' + name + '.xpi')
+            source_code = source.read().decode("utf-8")
+            xpi_file = re.findall(
+                '<a class="Button Button--action AMInstallButton-button Button--puffy" href="(.*?).xpi?',
+                source_code,
+            )[0]
+            core.updatelog("Found link for xpi file: " + xpi_file + ".xpi")
+            name = xpi_file.split("/")[-1]
+            xpi_file += ".xpi"
+            save_path = helper.fixpath(core.lab_path + "/" + name + ".xpi")
             core.updatelog("Downloader says: save_path is " + save_path)
             try:
                 urllib.request.urlretrieve(xpi_file, save_path)
@@ -68,4 +81,6 @@ def downloadFirefox(url):
                 print(e)
                 return False
         except Exception:
-            core.updatelog('Something went wrong while getting download link for xpi file')
+            core.updatelog(
+                "Something went wrong while getting download link for xpi file"
+            )
