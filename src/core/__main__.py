@@ -33,188 +33,189 @@ import core.core as core
 import core.helper as helper
 import core.settings as settings
 
-parser = argparse.ArgumentParser(prog="extanalysis.py", add_help=False)
-parser.add_argument(
-    "-h", "--host", help="Host to run ExtAnalysis on. Default host is 127.0.0.1"
-)
-parser.add_argument(
-    "-p", "--port", help="Port to run ExtAnalysis on. Default port is 13337"
-)
-parser.add_argument(
-    "-v", "--version", action="store_true", help="Shows version and quits"
-)
-parser.add_argument("-u", "--update", action="store_true", help="Checks for update")
-parser.add_argument(
-    "-q", "--quiet", action="store_true", help="Quiet mode shows only errors on cli!"
-)
-parser.add_argument(
-    "-n", "--nobrowser", action="store_true", help="Skips launching a web browser"
-)
-parser.add_argument(
-    "--help", action="store_true", help="Shows this help menu and exits"
-)
-args = parser.parse_args()
 
-allowed_extension = set(["crx", "zip", "xpi", "tar", "gzip"])
-log = logging.getLogger("werkzeug")
-log.setLevel(logging.ERROR)
+def create_app():
+    parser = argparse.ArgumentParser(prog="extanalysis.py", add_help=False)
+    parser.add_argument(
+        "-h", "--host", help="Host to run ExtAnalysis on. Default host is 127.0.0.1"
+    )
+    parser.add_argument(
+        "-p", "--port", help="Port to run ExtAnalysis on. Default port is 13337"
+    )
+    parser.add_argument(
+        "-v", "--version", action="store_true", help="Shows version and quits"
+    )
+    parser.add_argument("-u", "--update", action="store_true", help="Checks for update")
+    parser.add_argument(
+        "-q",
+        "--quiet",
+        action="store_true",
+        help="Quiet mode shows only errors on cli!",
+    )
+    parser.add_argument(
+        "-n", "--nobrowser", action="store_true", help="Skips launching a web browser"
+    )
+    parser.add_argument(
+        "--help", action="store_true", help="Shows this help menu and exits"
+    )
+    args = parser.parse_args()
 
-# Set host and port
-if args.host is not None:
-    host = args.host
-else:
-    host = "127.0.0.1"
+    allowed_extension = set(["crx", "zip", "xpi", "tar", "gzip"])
+    log = logging.getLogger("werkzeug")
+    log.setLevel(logging.ERROR)
 
-if args.port is not None:
-    port = int(args.port)
-else:
-    port = 13337
+    # Set host and port
+    if args.host is not None:
+        host = args.host
+    else:
+        host = "127.0.0.1"
 
-# enable Quiet mode
-if args.quiet:
-    core.quiet = True
+    if args.port is not None:
+        port = int(args.port)
+    else:
+        port = 13337
 
-# help
-if args.help:
-    parser.print_help()
-    parser.exit()
+    # enable Quiet mode
+    if args.quiet:
+        core.quiet = True
 
-# version
-if args.version:
-    # core.print_logo()
-    print("ExtAnalysis Version: " + core.version)
-    exit()
+    # help
+    if args.help:
+        parser.print_help()
+        parser.exit()
 
-if args.update:
-    import core.updater as updater
+    # version
+    if args.version:
+        # core.print_logo()
+        print("ExtAnalysis Version: " + core.version)
+        exit()
 
-    updater.check()
+    if args.update:
+        import core.updater as updater
 
+        updater.check()
 
-# core.updatelog('Initiating settings...')
+    csrf = CSRFProtect()
+    app = Flask("ExtAnalysis - Browser Extension Analysis Toolkit")
+    app.config["UPLOAD_FOLDER"] = core.lab_path
+    app.config["HOST"] = host
+    app.config["PORT"] = port
+    app.config["ALLOW_BROWSER"] = args.nobrowser is not True
+    app.secret_key = str(os.urandom(24))
+    csrf.init_app(app)
+
+    @app.errorhandler(404)
+    def page_not_found(e):
+        error_txt = "The page you are trying to browse does not exist... Please click on the logo to go back to homepage."
+        return render_template(
+            "error.html",
+            error_title="Error 404 - Page Not Found!",
+            error_head="The page you are looking for is kinda imaginary!",
+            error_txt=error_txt,
+        ), 404
+
+    @app.errorhandler(500)
+    def internal_error(e):
+        error_txt = "Welp! There's no good way of telling this but something has gone terribly wrong with the program!"
+        return render_template(
+            "error.html",
+            error_title="Error 500 - Internal Server Error!",
+            error_head="Something seriously went wrong... ",
+            error_txt=error_txt,
+        ), 500
+
+    @app.route("/")
+    def home():
+        core.updatelog("Accessed Main page")
+        lic = open(helper.fixpath(core.path + "/LICENSE"), "r")
+        license_text = lic.read()
+        cred = open(helper.fixpath(core.path + "/CREDITS"), "r")
+        credits_text = cred.read()
+        sett = open(core.settings_file, "r")
+        settings_json = sett.read()
+        return render_template(
+            "index.html",
+            report_dir=core.reports_path,
+            lab_dir=core.lab_path,
+            license_text=license_text,
+            credits_text=credits_text,
+            virustotal_api=core.virustotal_api,
+            settings_json=settings_json,
+        )
+
+    @app.route("/upload/", methods=["GET", "POST"])
+    def upload_file():
+        if request.method == "POST":
+            if "file" not in request.files:
+                return "error: No File uploaded"
+            file = request.files["file"]
+            if file.filename == "":
+                return "error: Empty File!"
+            if file and allowed_file(file.filename):
+                filename = secure_filename(file.filename or "")
+                file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
+                core.updatelog("File Uploaded.. Filename: " + filename)
+                # saveas = filename.split('.')[0]
+                analysis_results = analysis.analyze(filename)
+                return analysis_results
+            else:
+                return "error: Invalid file format! only .crx files allowed. If you're trying to upload zip file rename it to crx instead"
+
+    @app.route("/api/", methods=["POST"])
+    def api():
+        if request.method == "POST":
+            # query = request.args.get('query')
+            query = request.form["query"]
+            import frontend.api as process_api
+
+            return process_api.view(query, request.args)
+
+    @app.route("/log/")
+    def update_logs():
+        return core.log
+
+    @app.route("/view-graph/<analysis_id>")
+    def large_graph(analysis_id):
+        import frontend.viewgraph as viewgraph
+
+        return viewgraph.view(analysis_id)
+
+    @app.route("/view-source/<analysis_id>/<file_id>")
+    def view_source(analysis_id, file_id):
+        import frontend.viewfile as viewfile
+
+        return viewfile.view(analysis_id, file_id)
+
+    @app.route("/source-code/<url>")
+    def source_code(url):
+        import frontend.viewsource as vs
+
+        return vs.view(url)
+
+    @app.route("/analysis/<analysis_id>")
+    def show_analysis(analysis_id):
+        import frontend.viewresult as viewResult
+
+        return viewResult.view(analysis_id)
+
+    return app
 
 
 def allowed_file(filename):
     return "." in filename and filename.rsplit(".", 1)[1].lower() in allowed_extension
 
 
-csrf = CSRFProtect()
-app = Flask("ExtAnalysis - Browser Extension Analysis Toolkit")
-app.config["UPLOAD_FOLDER"] = core.lab_path
-app.secret_key = str(os.urandom(24))
-csrf.init_app(app)
-
-
-@app.errorhandler(404)
-def page_not_found(e):
-    error_txt = "The page you are trying to browse does not exist... Please click on the logo to go back to homepage."
-    return render_template(
-        "error.html",
-        error_title="Error 404 - Page Not Found!",
-        error_head="The page you are looking for is kinda imaginary!",
-        error_txt=error_txt,
-    ), 404
-
-
-@app.errorhandler(500)
-def internal_error(e):
-    error_txt = "Welp! There's no good way of telling this but something has gone terribly wrong with the program!"
-    return render_template(
-        "error.html",
-        error_title="Error 500 - Internal Server Error!",
-        error_head="Something seriously went wrong... ",
-        error_txt=error_txt,
-    ), 500
-
-
-@app.route("/")
-def home():
-    core.updatelog("Accessed Main page")
-    lic = open(helper.fixpath(core.path + "/LICENSE"), "r")
-    license_text = lic.read()
-    cred = open(helper.fixpath(core.path + "/CREDITS"), "r")
-    credits_text = cred.read()
-    sett = open(core.settings_file, "r")
-    settings_json = sett.read()
-    return render_template(
-        "index.html",
-        report_dir=core.reports_path,
-        lab_dir=core.lab_path,
-        license_text=license_text,
-        credits_text=credits_text,
-        virustotal_api=core.virustotal_api,
-        settings_json=settings_json,
-    )
-
-
-@app.route("/upload/", methods=["GET", "POST"])
-def upload_file():
-    if request.method == "POST":
-        if "file" not in request.files:
-            return "error: No File uploaded"
-        file = request.files["file"]
-        if file.filename == "":
-            return "error: Empty File!"
-        if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename or "")
-            file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
-            core.updatelog("File Uploaded.. Filename: " + filename)
-            # saveas = filename.split('.')[0]
-            analysis_results = analysis.analyze(filename)
-            return analysis_results
-        else:
-            return "error: Invalid file format! only .crx files allowed. If you're trying to upload zip file rename it to crx instead"
-
-
-@app.route("/api/", methods=["POST"])
-def api():
-    if request.method == "POST":
-        # query = request.args.get('query')
-        query = request.form["query"]
-        import frontend.api as process_api
-
-        return process_api.view(query, request.args)
-
-
-@app.route("/log/")
-def update_logs():
-    return core.log
-
-
-@app.route("/view-graph/<analysis_id>")
-def large_graph(analysis_id):
-    import frontend.viewgraph as viewgraph
-
-    return viewgraph.view(analysis_id)
-
-
-@app.route("/view-source/<analysis_id>/<file_id>")
-def view_source(analysis_id, file_id):
-    import frontend.viewfile as viewfile
-
-    return viewfile.view(analysis_id, file_id)
-
-
-@app.route("/source-code/<url>")
-def source_code(url):
-    import frontend.viewsource as vs
-
-    return vs.view(url)
-
-
-@app.route("/analysis/<analysis_id>")
-def show_analysis(analysis_id):
-    import frontend.viewresult as viewResult
-
-    return viewResult.view(analysis_id)
-
-
 def main():
+    app = create_app()
     core.print_logo()
     settings.init_settings()
-    main_url = "http://{0}:{1}".format(host, port)
-    if args.nobrowser is not True:
+
+    if app.config["ALLOW_BROWSER"]:
+        host = app.config["HOST"]
+        port = app.config["PORT"]
+        main_url = "http://{0}:{1}".format(host, port)
         webbrowser.open(main_url)
+
     print("\n[~] Starting ExtAnalysis at: {0} \n\n".format(main_url))
     app.run(host=host, port=port, debug=False)
 
