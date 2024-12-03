@@ -56,6 +56,9 @@ def create_app():
         "-n", "--nobrowser", action="store_true", help="Skips launching a web browser"
     )
     parser.add_argument(
+        "-r", "--rootdir", action="store", help="Optional root directory for ExtAnalysis"
+    )
+    parser.add_argument(
         "--help", action="store_true", help="Shows this help menu and exits"
     )
     args = parser.parse_args()
@@ -173,6 +176,10 @@ def create_app():
     @app.route("/log/")
     def update_logs():
         return core.log
+
+    @app.route("/version/")
+    def get_version():
+        return core.version or "X.Y.Z"
 
     @app.route("/view-graph/<analysis_id>")
     def large_graph(analysis_id):

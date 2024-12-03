@@ -30,6 +30,6 @@ jobs:
       run: |
         rye build
 
-    - name: Build
+    - name: Test
       run: |
         rye test
