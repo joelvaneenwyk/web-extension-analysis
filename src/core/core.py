@@ -30,19 +30,20 @@ import core.helper as helper
 # Version
 root = os.path.dirname(os.path.abspath(__file__))
 version = None
-while root != None and version is None:
+while root != None:
     try:
         with open(os.path.join(root, "current_version")) as vf:
             version = vf.read()
+
         if version is not None:
             break
+        else:
+            try:
+                root = os.path.abspath(os.path.join(root, os.pardir))
+            except:
+                root = None
     except IOError:
         pass
-
-    try:
-        root = os.path.abspath(os.path.join(root, os.pardir))
-    except:
-        root = None
 version = version or "0.0.0"
 
 ## all the paths

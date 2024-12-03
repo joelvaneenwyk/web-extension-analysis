@@ -32,6 +32,4 @@ packages = [
     "src/frontend",
     "src/main",
     "src/plugins",
-    "src/static",
-    "src/templates",
 ]
