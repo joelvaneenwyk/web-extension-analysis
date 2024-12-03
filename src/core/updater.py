@@ -53,7 +53,7 @@ def check():
                     # update it
                     update()
                 else:
-                    core.updatelog("Update cancled! Make sure update the app later")
+                    core.updatelog("Update canceled! Make sure update the app later")
                     core.handle_exit()
             elif latest_version == current_version:
                 print("you're already on the latest version!")
