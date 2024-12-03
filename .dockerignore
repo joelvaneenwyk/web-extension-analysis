@@ -1,7 +1,7 @@
 .venv/
 .run/
 .idea/
-.mypy_cache
+.mypy_cache/
 .github/
 .git/
 .gdn/

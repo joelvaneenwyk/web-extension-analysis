@@ -29,7 +29,8 @@ import shutil
 import tempfile
 import json
 import time
-import logging, traceback
+import logging
+import traceback
 import sys
 
 current_dir = "<current_extanalysis_directory>"
@@ -74,7 +75,7 @@ try:
         download_link, zip_loc, reporthook=download_progress_hook
     )
     print("\n[+] Zip Successfully downloaded: " + zip_loc)
-except Exception as e:
+except Exception:
     print(
         "[!] Something went wrong while downloading zip! Please update extanalysis manually"
     )
@@ -90,7 +91,7 @@ try:
     zip_contents.extractall(extract_location)
     zip_contents.close()
     print("[+] Unzipped successfully to: " + extract_location)
-except Exception as e:
+except Exception:
     print(
         "[!] Something went wrong while extracting zip! Please update extanalysis manually"
     )
@@ -137,7 +138,7 @@ try:
         except Exception as e:
             print("[!] Failed to copy File {0}. Error: {1}".format(_file, str(e)))
 
-except Exception as e:
+except Exception:
     print("Error While copying...")
 
 
