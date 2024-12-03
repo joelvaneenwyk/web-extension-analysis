@@ -202,9 +202,14 @@ def analyze(ext_name, ext_type="local"):
         ##### PERMISSION CHECKS AND OTHER STUFFS RELATED TO PERMISSIONS #####
         #####################################################################
         perm_file = helper.fixpath(core.path + "/db/permissions.json")
-        perms = open(perm_file, "r")
-        perms = perms.read()
-        perms = json.loads(perms)
+        perms = {}
+        try:
+            with open(perm_file, "r") as pm:
+                perms_data = pm.read()
+                perms = json.loads(perms_data)
+        except IOError:
+            pass
+
         try:
             for permission in manifest_content["permissions"]:
                 if permission != "":

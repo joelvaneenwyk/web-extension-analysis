@@ -38,14 +38,14 @@ def download(id, name=""):
         + ext_id
         + "%26uc"
     )
-    print("Download URL: " + dl_url)
+    core.updatelog("Download URL: " + dl_url)
 
     try:
         urllib.request.urlretrieve(dl_url, save_path)
         core.updatelog("Extension downloaded successfully: " + save_path)
         return save_name
     except Exception as e:
-        core.updatelog("Error in downloader.py")
+        core.updatelog("Error in downloader.py\n%s" % str(e))
         print(e)
         return False
 
