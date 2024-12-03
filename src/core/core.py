@@ -27,22 +27,15 @@ import traceback
 
 import core.helper as helper
 
-## all the paths
-path = (
-    os.path.dirname(os.path.abspath(__file__))
-    .replace("/core", "")
-    .replace("\\core", "")
-)
-lab_path = helper.fixpath(path + "/lab")
-reports_path = helper.fixpath(path + "/reports")
-
 # Version
-root = path
-while root != None:
+root = os.path.dirname(os.path.abspath(__file__))
+version = None
+while root != None and version is None:
     try:
-        with open(os.path.join(path, "current_version")) as vf:
+        with open(os.path.join(root, "current_version")) as vf:
             version = vf.read()
-        break
+        if version is not None:
+            break
     except IOError:
         pass
 
@@ -50,6 +43,12 @@ while root != None:
         root = os.path.abspath(os.path.join(root, os.pardir))
     except:
         root = None
+version = version or "0.0.0"
+
+## all the paths
+path = root
+lab_path = helper.fixpath(path + "/lab")
+reports_path = helper.fixpath(path + "/reports")
 
 # All the variables
 quiet = False

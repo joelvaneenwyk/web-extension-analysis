@@ -1344,9 +1344,9 @@ definitions = {
         "extractors": {
             "func": ["DOMPurify.version"],
             "filecontent": [
-                "DOMPurify.version = '([0-9][0-9.a-z_-]+)';",
-                'DOMPurify.version="([0-9][0-9.a-z_-]+)"',
-                'DOMPurify=.[^\r\n]{10,500}\.version="([0-9][0-9.a-z_-]+)"',
+                r"DOMPurify.version = '([0-9][0-9.a-z_-]+)';",
+                r'DOMPurify.version="([0-9][0-9.a-z_-]+)"',
+                r'DOMPurify=.[^\r\n]{10,500}\.version="([0-9][0-9.a-z_-]+)"',
             ],
             "hashes": {},
         },

@@ -90,14 +90,7 @@ rye run extanalysis
 
 It should automatically launch `ExtAnalysis` in a new browser window.
 
-For other options check out the help menu
-
-```bash
-rye run extanalysis
-```
-
-```bash
-rye run extanalysis --help
+For other options check out the help menu with `rye run extanalysis --help`.
 
 ```bash
 usage: extanalysis.py [-h HOST] [-p PORT] [-v] [-u] [-q] [--help]
