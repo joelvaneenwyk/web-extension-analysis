@@ -18,3 +18,4 @@ dist/
 venv/
 .pytest_cache/
 .git/
+.ruff_cache/
