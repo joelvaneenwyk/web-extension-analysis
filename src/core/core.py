@@ -28,22 +28,18 @@ import traceback
 import core.helper as helper
 
 # Version
-root = os.path.dirname(os.path.abspath(__file__))
+parent = os.path.dirname(os.path.abspath(__file__))
+root = None
 version = None
-while root != None:
+while version is None:
     try:
-        with open(os.path.join(root, "current_version")) as vf:
+        with open(os.path.join(parent, "current_version")) as vf:
             version = vf.read()
-
-        if version is not None:
-            break
-        else:
-            try:
-                root = os.path.abspath(os.path.join(root, os.pardir))
-            except:
-                root = None
+            root = parent
     except IOError:
         pass
+
+    parent = os.path.abspath(os.path.join(parent, os.pardir))
 version = version or "0.0.0"
 
 ## all the paths
