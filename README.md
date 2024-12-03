@@ -29,17 +29,17 @@
   - Mozilla Firefox
   - Opera Browser (Coming Soon)
 - Upload and Scan Extensions. Supported formats:
-  - .crx
-  - .xpi
-  - .zip
+  - `.crx`
+  - `.xpi`
+  - `.zip`
 
 ## Features of ExtAnalysis
 
-- View Basic Informations:
+- View Basic Information:
   - Name, Author, Description and Version
 - Manifest Viewer
 - In depth permission information
-- Extract Intels from files which include:
+- Extract intel from files which include:
   - URLs and domains
   - IPv6 and IPv4 addresses
   - Bitcoin addresses
@@ -58,10 +58,10 @@
 - RetireJS Vulnerability scan for JavaScript files
 - Network graph of all files and URLs
 - Reconnaissance tools for extracted URLs:
-  - Whois Scan
-  - HTTP headers viewer
-  - URL Source viewer
-  - GEO-IP location
+  - `Whois` scan
+  - `HTTP Headers` viewer
+  - `URL Source` viewer
+  - `GEO-IP` location
 - Some Fun Stuffs that include:
   - Dark Mode
   - Inbuilt chiptune player (*Jam on to some classic chiptune while ExtAnalysis does the work*)
@@ -86,11 +86,23 @@ For proper analysis don't forget to add your VirusTotal api.
 
 ## How do I use it?
 
-Once the installation is done you can jump straight ahead and run ExtAnalysis by running the command:
- **$** `python3 extanalysis.py`
-It should automatically launch ExtAnalysis in a new browser window.
+Once the installation is done you can jump straight ahead and run `ExtAnalysis` by running the command:
 
-For other options check out the help menu **$** `python3 extanalysis.py --help`
+```bash
+python3 extanalysis.py
+```
+
+It should automatically launch `ExtAnalysis` in a new browser window.
+
+For other options check out the help menu
+
+```bash
+python3 extanalysis.py
+```
+
+```bash
+python3 extanalysis.py --help
+```
 
 ```bash
 usage: extanalysis.py [-h HOST] [-p PORT] [-v] [-u] [-q] [--help]
@@ -120,12 +132,12 @@ docker run --rm -it -p 13337:13337 extanalysis -h 0.0.0.0
 
  ```bash
  docker compose build
- 
+
  docker compose up
 
  ## Or just:
  docker compose up --build
- 
+
  ## To run only for one-time use
  docker-compose run --rm --build -it -p 13337:13337 extanalysis -h 0.0.0.0
 
@@ -150,7 +162,7 @@ docker run --rm -it -p 13337:13337 extanalysis -h 0.0.0.0
 
 ## Contribution
 
-You can contribute to the development of ExtAnalysis by improving some code or even reporting by bugs.
+You can contribute to the development of `ExtAnalysis` by improving some code or even reporting by bugs.
 
 For any other queries feel free to contact me via twitter: [@r3dhax0r](https://twitter.com/r3dhax0r)
 

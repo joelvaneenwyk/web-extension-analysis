@@ -10,7 +10,10 @@ permission-badges.list
 reports/*
 reports.json
 extanalysis.log
-.venv
+.venv/
 .idea/
 venv
 .mypy_cache/
+dist/
+venv/
+.pytest_cache/
