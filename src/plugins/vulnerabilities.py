@@ -148,18 +148,18 @@ definitions = {
             "uri": [r"/([0-9][0-9.a-z_-]+)/jquery(\.min)?\.js"],
             "filename": [r"jquery-([0-9][0-9.a-z_-]+)(\.min)?\.js"],
             "filecontent": [
-                "/\*!? jQuery v([0-9][0-9.a-z_-]+)",
-                "\* jQuery JavaScript Library v([0-9][0-9.a-z_-]+)",
-                "\* jQuery ([0-9][0-9.a-z_-]+) - New Wave Javascript",
-                "// \$Id: jquery.js,v ([0-9][0-9.a-z_-]+)",
-                "/\*! jQuery v([0-9][0-9.a-z_-]+)",
-                '[^a-z]f="([0-9][0-9.a-z_-]+)",.*[^a-z]jquery:f,',
-                '[^a-z]m="([0-9][0-9.a-z_-]+)",.*[^a-z]jquery:m,',
-                '[^a-z.]jquery:[ ]?"([0-9][0-9.a-z_-]+)"',
-                '\$\.documentElement,Q=e.jQuery,Z=e\.\$,ee=\{\},te=\[\],ne="([0-9][0-9.a-z_-]+)"',
+                r"/\*!? jQuery v([0-9][0-9.a-z_-]+)",
+                r"\* jQuery JavaScript Library v([0-9][0-9.a-z_-]+)",
+                r"\* jQuery ([0-9][0-9.a-z_-]+) - New Wave Javascript",
+                r"// \$Id: jquery.js,v ([0-9][0-9.a-z_-]+)",
+                r"/\*! jQuery v([0-9][0-9.a-z_-]+)",
+                r'[^a-z]f="([0-9][0-9.a-z_-]+)",.*[^a-z]jquery:f,',
+                r'[^a-z]m="([0-9][0-9.a-z_-]+)",.*[^a-z]jquery:m,',
+                r'[^a-z.]jquery:[ ]?"([0-9][0-9.a-z_-]+)"',
+                r'\$\.documentElement,Q=e.jQuery,Z=e\.\$,ee=\{\},te=\[\],ne="([0-9][0-9.a-z_-]+)"',
             ],
             "filecontentreplace": [
-                '/var [a-z]=[a-z]\.document,([a-z])="([0-9][0-9.a-z_-]+)",([a-z])=.{130,160};\3\.fn=\3\.prototype=\{jquery:\1/$2/'
+                r'/var [a-z]=[a-z]\.document,([a-z])="([0-9][0-9.a-z_-]+)",([a-z])=.{130,160};\3\.fn=\3\.prototype=\{jquery:\1/$2/'
             ],
             "hashes": {},
         },
@@ -193,7 +193,7 @@ definitions = {
         "extractors": {
             "filename": [r"jquery-migrate-([0-9][0-9.a-z_-]+)(.min)?\.js"],
             "filecontent": [
-                "/\*!?(?:\n \*)? jQuery Migrate(?: -)? v([0-9][0-9.a-z_-]+)"
+                r"/\*!?(?:\n \*)? jQuery Migrate(?: -)? v([0-9][0-9.a-z_-]+)"
             ],
             "hashes": {},
         },
@@ -206,7 +206,7 @@ definitions = {
             "filename": [r"jquery.validation-([0-9][0-9.a-z_-]+)(.min)?\.js"],
             "uri": [r"/([0-9][0-9.a-z_-]+)/jquery.validation(\.min)?\.js"],
             "filecontent": [
-                "/\*!?(?:\n \*)? jQuery Validation Plugin v([0-9][0-9.a-z_-]+)"
+                r"/\*!?(?:\n \*)? jQuery Validation Plugin v([0-9][0-9.a-z_-]+)"
             ],
             "hashes": {},
         },
@@ -280,7 +280,7 @@ definitions = {
             "filename": [r"jquery.mobile-([0-9][0-9.a-z_-]+)(.min)?\.js"],
             "uri": [r"/([0-9][0-9.a-z_-]+)/jquery.mobile(\.min)?\.js"],
             "filecontent": [
-                "/\*!?(?:\n \*)? jQuery Mobile(?: -)? v([0-9][0-9.a-z_-]+)"
+                r"/\*!?(?:\n \*)? jQuery Mobile(?: -)? v([0-9][0-9.a-z_-]+)"
             ],
             "hashes": {},
         },
@@ -320,10 +320,10 @@ definitions = {
         "extractors": {
             "func": ["jQuery.ui.dialog.version"],
             "filecontent": [
-                "/\*!? jQuery UI - v([0-9][0-9.a-z_-]+)(.*\n){1,3}.*jquery\.ui\.dialog\.js",
-                "/\*!?[\n *]+jQuery UI ([0-9][0-9.a-z_-]+)(.*\n)*.*\.ui\.dialog",
-                "/\*!?[\n *]+jQuery UI Dialog ([0-9][0-9.a-z_-]+)",
-                "/\*!? jQuery UI - v([0-9][0-9.a-z_-]+)(.*\n){1,3}\* Includes: .* dialog\.js",
+                r"/\*!? jQuery UI - v([0-9][0-9.a-z_-]+)(.*\n){1,3}.*jquery\.ui\.dialog\.js",
+                r"/\*!?[\n *]+jQuery UI ([0-9][0-9.a-z_-]+)(.*\n)*.*\.ui\.dialog",
+                r"/\*!?[\n *]+jQuery UI Dialog ([0-9][0-9.a-z_-]+)",
+                r"/\*!? jQuery UI - v([0-9][0-9.a-z_-]+)(.*\n){1,3}\* Includes: .* dialog\.js",
             ],
             "hashes": {},
         },
@@ -334,10 +334,10 @@ definitions = {
         "extractors": {
             "func": ["jQuery.ui.autocomplete.version"],
             "filecontent": [
-                "/\*!? jQuery UI - v([0-9][0-9.a-z_-]+)(.*\n){1,3}.*jquery\.ui\.autocomplete\.js",
-                "/\*!?[\n *]+jQuery UI ([0-9][0-9.a-z_-]+)(.*\n)*.*\.ui\.autocomplete",
-                "/\*!?[\n *]+jQuery UI Autocomplete ([0-9][0-9.a-z_-]+)",
-                "/\*!? jQuery UI - v([0-9][0-9.a-z_-]+)(.*\n){1,3}\* Includes: .* autocomplete\.js",
+                r"/\*!? jQuery UI - v([0-9][0-9.a-z_-]+)(.*\n){1,3}.*jquery\.ui\.autocomplete\.js",
+                r"/\*!?[\n *]+jQuery UI ([0-9][0-9.a-z_-]+)(.*\n)*.*\.ui\.autocomplete",
+                r"/\*!?[\n *]+jQuery UI Autocomplete ([0-9][0-9.a-z_-]+)",
+                r"/\*!? jQuery UI - v([0-9][0-9.a-z_-]+)(.*\n){1,3}\* Includes: .* autocomplete\.js",
             ],
             "hashes": {},
         },
@@ -363,9 +363,9 @@ definitions = {
         "extractors": {
             "func": ["jQuery.ui.tooltip.version"],
             "filecontent": [
-                "/\*!? jQuery UI - v([0-9][0-9.a-z_-]+)(.*\n){1,3}.*jquery\.ui\.tooltip\.js",
-                "/\*!?[\n *]+jQuery UI ([0-9][0-9.a-z_-]+)(.*\n)*.*\.ui\.tooltip",
-                "/\*!?[\n *]+jQuery UI Tooltip ([0-9][0-9.a-z_-]+)",
+                r"/\*!? jQuery UI - v([0-9][0-9.a-z_-]+)(.*\n){1,3}.*jquery\.ui\.tooltip\.js",
+                r"/\*!?[\n *]+jQuery UI ([0-9][0-9.a-z_-]+)(.*\n)*.*\.ui\.tooltip",
+                r"/\*!?[\n *]+jQuery UI Tooltip ([0-9][0-9.a-z_-]+)",
             ],
             "hashes": {},
         },
@@ -391,8 +391,8 @@ definitions = {
         "extractors": {
             "func": ["jQuery.prettyPhoto.version"],
             "filecontent": [
-                "/\*(?:.*[\n\r]+){1,3}.*Class: prettyPhoto(?:.*[\n\r]+){1,3}.*Version: ([0-9][0-9.a-z_-]+)",
-                "\.prettyPhoto[ ]?=[ ]?\{version:[ ]?(?:'|\")([0-9][0-9.a-z_-]+)(?:'|\")\}",
+                r"/\*(?:.*[\n\r]+){1,3}.*Class: prettyPhoto(?:.*[\n\r]+){1,3}.*Version: ([0-9][0-9.a-z_-]+)",
+                r"\.prettyPhoto[ ]?=[ ]?\{version:[ ]?(?:'|\")([0-9][0-9.a-z_-]+)(?:'|\")\}",
             ],
             "hashes": {},
         },
@@ -443,7 +443,7 @@ definitions = {
         "extractors": {
             "func": ["new jQuery.jPlayer().version.script"],
             "filecontent": [
-                "/\*(?:.*[\n\r]+){1,3}.*jPlayer Plugin for jQuery(?:.*[\n\r]+){1,10}.*Version: ([0-9][0-9.a-z_-]+)"
+                r"/\*(?:.*[\n\r]+){1,3}.*jPlayer Plugin for jQuery(?:.*[\n\r]+){1,10}.*Version: ([0-9][0-9.a-z_-]+)"
             ],
             "hashes": {},
         },
@@ -494,7 +494,7 @@ definitions = {
             }
         ],
         "extractors": {
-            "filename": ["swfobject_([0-9][0-9.a-z_-]+)(.min)?\.js"],
+            "filename": [r"swfobject_([0-9][0-9.a-z_-]+)(.min)?\.js"],
             "filecontent": [r"SWFObject v([0-9][0-9.a-z_-]+) "],
             "hashes": {},
         },
@@ -538,11 +538,11 @@ definitions = {
         ],
         "extractors": {
             "filecontent": [
-                "// ([0-9][0-9.a-z_-]+) \([0-9\-]+\)[\n\r]+.{0,1200}l=.tinymce/geom/Rect."
+                r"// ([0-9][0-9.a-z_-]+) \([0-9\-]+\)[\n\r]+.{0,1200}l=.tinymce/geom/Rect."
             ],
             "filecontentreplace": [
-                "/tinyMCEPreInit.*majorVersion:.([0-9]+).,minorVersion:.([0-9.]+)./$1.$2/",
-                "/majorVersion:.([0-9]+).,minorVersion:.([0-9.]+).,.*tinyMCEPreInit/$1.$2/",
+                r"/tinyMCEPreInit.*majorVersion:.([0-9]+).,minorVersion:.([0-9.]+)./$1.$2/",
+                r"/majorVersion:.([0-9]+).,minorVersion:.([0-9.]+).,.*tinyMCEPreInit/$1.$2/",
             ],
             "func": ["tinyMCE.majorVersion + '.'+ tinyMCE.minorVersion"],
         },
@@ -631,8 +631,8 @@ definitions = {
             "func": ["YUI.Version", "YAHOO.VERSION"],
             "filename": [r"yui-([0-9][0-9.a-z_-]+)(.min)?\.js"],
             "filecontent": [
-                "/*\nYUI ([0-9][0-9.a-z_-]+)",
-                "/yui/license.(?:html|txt)\nversion: ([0-9][0-9.a-z_-]+)",
+                r"/*\nYUI ([0-9][0-9.a-z_-]+)",
+                r"/yui/license.(?:html|txt)\nversion: ([0-9][0-9.a-z_-]+)",
             ],
             "hashes": {},
         },
@@ -665,8 +665,8 @@ definitions = {
             "uri": [r"/([0-9][0-9.a-z_-]+)/prototype(\.min)?\.js"],
             "filename": [r"prototype-([0-9][0-9.a-z_-]+)(.min)?\.js"],
             "filecontent": [
-                "Prototype JavaScript framework, version ([0-9][0-9.a-z_-]+)",
-                "Prototype[ ]?=[ ]?\{[ \r\n\t]*Version:[ ]?(?:'|\")([0-9][0-9.a-z_-]+)(?:'|\")",
+                r"Prototype JavaScript framework, version ([0-9][0-9.a-z_-]+)",
+                r"Prototype[ ]?=[ ]?\{[ \r\n\t]*Version:[ ]?(?:'|\")([0-9][0-9.a-z_-]+)(?:'|\")",
             ],
             "hashes": {},
         },
@@ -879,9 +879,9 @@ definitions = {
             "uri": [r"/(?:v)?([0-9][0-9.a-z_-]+)/ember(\.min)?\.js"],
             "filename": [r"ember-([0-9][0-9.a-z_-]+)(\.min)?\.js"],
             "filecontent": [
-                "Project:   Ember -(?:.*\n){9,11}// Version: v([0-9][0-9.a-z_-]+)",
-                "// Version: v([0-9][0-9.a-z_-]+)(.*\n){10,15}(Ember Debug|@module ember|@class ember)",
-                "Ember.VERSION[ ]?=[ ]?(?:'|\")([0-9][0-9.a-z_-]+)(?:'|\")",
+                r"Project:   Ember -(?:.*\n){9,11}// Version: v([0-9][0-9.a-z_-]+)",
+                r"// Version: v([0-9][0-9.a-z_-]+)(.*\n){10,15}(Ember Debug|@module ember|@class ember)",
+                r"Ember.VERSION[ ]?=[ ]?(?:'|\")([0-9][0-9.a-z_-]+)(?:'|\")",
             ],
             "hashes": {},
         },
@@ -1110,8 +1110,8 @@ definitions = {
             "uri": [r"/([0-9][0-9.a-z_-]+)/angular(\.min)?\.js"],
             "filename": [r"angular(?:js)?-([0-9][0-9.a-z_-]+)(.min)?\.js"],
             "filecontent": [
-                "/\*[ \n]+AngularJS v([0-9][0-9.a-z_-]+)",
-                "http://errors\.angularjs\.org/([0-9][0-9.a-z_-]+)/",
+                r"/\*[ \n]+AngularJS v([0-9][0-9.a-z_-]+)",
+                r"http://errors\.angularjs\.org/([0-9][0-9.a-z_-]+)/",
             ],
             "hashes": {},
         },
@@ -1134,8 +1134,8 @@ definitions = {
             "uri": [r"/([0-9][0-9.a-z_-]+)/backbone(\.min)?\.js"],
             "filename": [r"backbone(?:js)?-([0-9][0-9.a-z_-]+)(.min)?\.js"],
             "filecontent": [
-                "//[ ]+Backbone.js ([0-9][0-9.a-z_-]+)",
-                'a=t.Backbone={}}a.VERSION="([0-9][0-9.a-z_-]+)"',
+                r"//[ ]+Backbone.js ([0-9][0-9.a-z_-]+)",
+                r'a=t.Backbone={}}a.VERSION="([0-9][0-9.a-z_-]+)"',
             ],
             "hashes": {},
         },
@@ -1170,9 +1170,9 @@ definitions = {
             "uri": [r"/([0-9][0-9.a-z_-]+)/mustache(\.min)?\.js"],
             "filename": [r"mustache(?:js)?-([0-9][0-9.a-z_-]+)(.min)?\.js"],
             "filecontent": [
-                'name:"mustache.js",version:"([0-9][0-9.a-z_-]+)"',
-                "[^a-z]mustache.version[ ]?=[ ]?(?:'|\")([0-9][0-9.a-z_-]+)(?:'|\")",
-                'exports.name[ ]?=[ ]?"mustache.js";[\n ]*exports.version[ ]?=[ ]?(?:\'|")([0-9][0-9.a-z_-]+)(?:\'|");',
+                r'name:"mustache.js",version:"([0-9][0-9.a-z_-]+)"',
+                r"[^a-z]mustache.version[ ]?=[ ]?(?:'|\")([0-9][0-9.a-z_-]+)(?:'|\")",
+                r'exports.name[ ]?=[ ]?"mustache.js";[\n ]*exports.version[ ]?=[ ]?(?:\'|")([0-9][0-9.a-z_-]+)(?:\'|");',
             ],
             "hashes": {},
         },
@@ -1238,10 +1238,10 @@ definitions = {
             "uri": [r"/([0-9][0-9.a-z_-]+)/handlebars(\.min)?\.js"],
             "filename": [r"handlebars(?:js)?-([0-9][0-9.a-z_-]+)(.min)?\.js"],
             "filecontent": [
-                'Handlebars.VERSION = "([0-9][0-9.a-z_-]+)";',
-                "Handlebars=\{VERSION:(?:'|\")([0-9][0-9.a-z_-]+)(?:'|\")",
-                "this.Handlebars=\{\};[\n\r \t]+\(function\([a-z]\)\{[a-z].VERSION=(?:'|\")([0-9][0-9.a-z_-]+)(?:'|\")",
-                "/\*![\n\r \t]+handlebars v([0-9][0-9.a-z_-]+)",
+                r'Handlebars.VERSION = "([0-9][0-9.a-z_-]+)";',
+                r"Handlebars=\{VERSION:(?:'|\")([0-9][0-9.a-z_-]+)(?:'|\")",
+                r"this.Handlebars=\{\};[\n\r \t]+\(function\([a-z]\)\{[a-z].VERSION=(?:'|\")([0-9][0-9.a-z_-]+)(?:'|\")",
+                r"/\*![\n\r \t]+handlebars v([0-9][0-9.a-z_-]+)",
             ],
             "hashes": {},
         },
@@ -1271,8 +1271,8 @@ definitions = {
             "uri": [r"/(?:easyXDM-)?([0-9][0-9.a-z_-]+)/easyXDM(\.min)?\.js"],
             "filename": [r"easyXDM-([0-9][0-9.a-z_-]+)(.min)?\.js"],
             "filecontent": [
-                ' \* easyXDM\n \* http://easyxdm.net/(?:\r|\n|.)+version:"([0-9][0-9.a-z_-]+)"',
-                "@class easyXDM(?:.|\r|\n)+@version ([0-9][0-9.a-z_-]+)(\r|\n)",
+                r' \* easyXDM\n \* http://easyxdm.net/(?:\r|\n|.)+version:"([0-9][0-9.a-z_-]+)"',
+                r"@class easyXDM(?:.|\r|\n)+@version ([0-9][0-9.a-z_-]+)(\r|\n)",
             ],
             "hashes": {"cf266e3bc2da372c4f0d6b2bd87bcbaa24d5a643": "2.4.6"},
         },
@@ -1304,8 +1304,8 @@ definitions = {
             "uri": [r"/([0-9][0-9.a-z_-]+)/plupload(\.min)?\.js"],
             "filename": [r"plupload-([0-9][0-9.a-z_-]+)(.min)?\.js"],
             "filecontent": [
-                "\* Plupload - multi-runtime File Uploader(?:\r|\n)+ \* v([0-9][0-9.a-z_-]+)",
-                'var g=\{VERSION:"([0-9][0-9.a-z_-]+)",.*;window.plupload=g\}',
+                r"\* Plupload - multi-runtime File Uploader(?:\r|\n)+ \* v([0-9][0-9.a-z_-]+)",
+                r'var g=\{VERSION:"([0-9][0-9.a-z_-]+)",.*;window.plupload=g\}',
             ],
             "hashes": {},
         },
@@ -1530,7 +1530,7 @@ definitions = {
         "extractors": {
             "func": ["moment.version"],
             "filecontent": [
-                "//! moment.js(?:[\n\r]+)//! version : ([0-9][0-9.a-z_-]+)"
+                r"//! moment.js(?:[\n\r]+)//! version : ([0-9][0-9.a-z_-]+)"
             ],
         },
     },
@@ -1631,9 +1631,9 @@ definitions = {
             "uri": [r"/([0-9][0-9.a-z_-]+)/bootstrap(\.min)?\.js"],
             "filename": [r"bootstrap-([0-9][0-9.a-z_-]+)(\.min)?\.js"],
             "filecontent": [
-                "/\*!? Bootstrap v([0-9][0-9.a-z_-]+)",
-                "\* Bootstrap v([0-9][0-9.a-z_-]+)",
-                "/\*! Bootstrap v([0-9][0-9.a-z_-]+)",
+                r"/\*!? Bootstrap v([0-9][0-9.a-z_-]+)",
+                r"\* Bootstrap v([0-9][0-9.a-z_-]+)",
+                r"/\*! Bootstrap v([0-9][0-9.a-z_-]+)",
             ],
             "hashes": {},
         },
@@ -1699,8 +1699,8 @@ definitions = {
             "uri": [r"/([0-9][0-9.a-z_-]+)/ckeditor(\.min)?\.js"],
             "filename": [r"ckeditor-([0-9][0-9.a-z_-]+)(\.min)?\.js"],
             "filecontent": [
-                'ckeditor..js.{4,20}=\{timestamp:"[^"]+",version:"([0-9][0-9.a-z_-]+)',
-                'window.CKEDITOR=function\(\)\{var [a-z]=\{timestamp:"[^"]+",version:"([0-9][0-9.a-z_-]+)',
+                r'ckeditor..js.{4,20}=\{timestamp:"[^"]+",version:"([0-9][0-9.a-z_-]+)',
+                r'window.CKEDITOR=function\(\)\{var [a-z]=\{timestamp:"[^"]+",version:"([0-9][0-9.a-z_-]+)',
             ],
             "hashes": {},
             "func": ["CKEDITOR.version"],
@@ -1725,9 +1725,9 @@ definitions = {
             "uri": [r"/vue@([0-9][0-9.a-z_-]+)/dist/vue\.js"],
             "filename": [r"vue-([0-9][0-9.a-z_-]+)(\.min)?\.js"],
             "filecontent": [
-                "/\*!\n * Vue.js v([0-9][0-9.a-z_-]+)",
-                "Vue.version = '([0-9][0-9.a-z_-]+)';",
-                "'([0-9][0-9.a-z_-]+)'[^\n]{0,8000}Vue compiler",
+                r"/\*!\n * Vue.js v([0-9][0-9.a-z_-]+)",
+                r"Vue.version = '([0-9][0-9.a-z_-]+)';",
+                r"'([0-9][0-9.a-z_-]+)'[^\n]{0,8000}Vue compiler",
             ],
             "func": ["Vue.version"],
         },

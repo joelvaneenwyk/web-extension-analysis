@@ -1,8 +1,7 @@
-import core.__main__ as main
 
 
 def test_version(client):
-    response = client.get('/version/')
+    response = client.get("/version/")
 
     # Check the response status code
     assert response.status_code == 200

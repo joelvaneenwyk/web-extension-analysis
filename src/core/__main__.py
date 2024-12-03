@@ -56,14 +56,17 @@ def create_app():
         "-n", "--nobrowser", action="store_true", help="Skips launching a web browser"
     )
     parser.add_argument(
-        "-r", "--rootdir", action="store", help="Optional root directory for ExtAnalysis"
+        "-r",
+        "--rootdir",
+        action="store",
+        help="Optional root directory for ExtAnalysis",
     )
     parser.add_argument(
         "--help", action="store_true", help="Shows this help menu and exits"
     )
     args = parser.parse_args()
 
-    allowed_extension = set(["crx", "zip", "xpi", "tar", "gzip"])
+    set(["crx", "zip", "xpi", "tar", "gzip"])
     log = logging.getLogger("werkzeug")
     log.setLevel(logging.ERROR)
 
