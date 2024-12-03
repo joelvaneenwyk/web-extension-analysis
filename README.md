@@ -85,7 +85,7 @@ For proper analysis don't forget to add your VirusTotal api.
 Once the installation is done you can jump straight ahead and run `ExtAnalysis` by running the command:
 
 ```bash
-python3 extanalysis.py
+rye run extanalysis
 ```
 
 It should automatically launch `ExtAnalysis` in a new browser window.
@@ -93,12 +93,11 @@ It should automatically launch `ExtAnalysis` in a new browser window.
 For other options check out the help menu
 
 ```bash
-python3 extanalysis.py
+rye run extanalysis
 ```
 
 ```bash
-python3 extanalysis.py --help
-```
+rye run extanalysis --help
 
 ```bash
 usage: extanalysis.py [-h HOST] [-p PORT] [-v] [-u] [-q] [--help]
