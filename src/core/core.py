@@ -29,7 +29,9 @@ import core.helper as helper
 
 ## all the paths
 path = (
-    os.path.dirname(os.path.abspath(__file__)).replace("/core", "").replace("\\core", "")
+    os.path.dirname(os.path.abspath(__file__))
+    .replace("/core", "")
+    .replace("\\core", "")
 )
 lab_path = helper.fixpath(path + "/lab")
 reports_path = helper.fixpath(path + "/reports")
@@ -216,7 +218,7 @@ def extract_urls(file_path):
         cnt = open(helper.fixpath(file_path), "r", encoding="utf8")
         contents = cnt.read()
         curls = re.findall(
-            "(http|ftp|https)://([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-])?",
+            r"(http|ftp|https)://([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-])?",
             contents,
         )
         for url in curls:
