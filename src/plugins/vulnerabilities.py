@@ -1026,7 +1026,7 @@ definitions = {
             "uri": [r"/(?:dojo-)?([0-9][0-9.a-z_-]+)/dojo(\.min)?\.js"],
             "filename": [r"dojo-([0-9][0-9.a-z_-]+)(\.min)?\.js"],
             "filecontentreplace": [
-                "/dojo.version=\{major:([0-9]+),minor:([0-9]+),patch:([0-9]+)/$1.$2.$3/"
+                r"/dojo.version={major:([0-9]+),minor:([0-9]+),patch:([0-9]+)/$1.$2.$3/"
             ],
             "hashes": {
                 "73cdd262799aab850abbe694cd3bfb709ea23627": "1.4.1",
@@ -1778,9 +1778,9 @@ definitions = {
         "extractors": {
             "uri": [r"/extjs/([0-9][0-9.a-z_-]+)/.*\.js"],
             "filename": [
-                "/ext-all-([0-9][0-9.a-z_-]+)(\.min)?\.js",
-                "/ext-all-debug-([0-9][0-9.a-z_-]+)(\.min)?\.js",
-                "/ext-base-([0-9][0-9.a-z_-]+)(\.min)?\.js",
+                r"/ext-all-([0-9][0-9.a-z_-]+)(\.min)?.js",
+                r"/ext-all-debug-([0-9][0-9.a-z_-]+)(\.min)?.js",
+                r"/ext-base-([0-9][0-9.a-z_-]+)(\.min)?.js",
             ],
             "filecontent": [r"/*!\n * Ext JS Library ([0-9][0-9.a-z_-]+)"],
             "func": [

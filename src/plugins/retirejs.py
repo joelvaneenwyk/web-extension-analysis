@@ -2,7 +2,7 @@ import re
 
 try:
     from .vulnerabilities import definitions
-except:
+except ImportError:
     from vulnerabilities import definitions
 
 import hashlib
@@ -125,7 +125,7 @@ def _to_comparable(n):
 
 
 def _replace_version(jsRepoJsonAsText):
-    return re.sub(r"[.0-9]*", "[0-9][0-9.a-z_\-]+", jsRepoJsonAsText)
+    return re.sub(r"[.0-9]*", r"[0-9][0-9.a-z_-]+", jsRepoJsonAsText)
 
 
 def is_vulnerable(results):
