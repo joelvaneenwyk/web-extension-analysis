@@ -16,7 +16,10 @@ extanalysis = "main.__main__:main"
 
 [tool.rye]
 managed = true
-dev-dependencies = ["pytest>=8.2.1"]
+dev-dependencies = [
+    "pytest>=8.2.1",
+    "ruff>=0.8.1",
+]
 
 [tool.hatch.metadata]
 allow-direct-references = true
