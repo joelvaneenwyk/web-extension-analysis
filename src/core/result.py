@@ -126,7 +126,7 @@ class createresult:
             return False
 
     def creategraphdata(self):
-        if self.list_status != False:
+        if self.list_status is not False:
             # Extract urls from all html, json, js files
             for file in self.files:
                 if (
@@ -140,7 +140,7 @@ class createresult:
                     try:
                         core.updatelog("Trying to extract urls from: " + file_path)
                         file_urls = core.extract_urls(file_path)
-                        if file_urls != [] and file_urls != False:
+                        if file_urls != [] and file_urls is not False:
                             for file_url in file_urls:
                                 self.urls.append(
                                     {
@@ -348,7 +348,7 @@ class createresult:
 
             # get file list and create the graph
             graph_data_stat = self.creategraphdata()
-            if graph_data_stat != False:
+            if graph_data_stat is not False:
                 graph_file = helper.fixpath(result_directory + "/graph.data")
                 graph_file_create = open(graph_file, "w+")
                 graph_file_create.write(self.nodes + "\n" + self.edges)

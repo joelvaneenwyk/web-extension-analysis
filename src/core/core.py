@@ -143,7 +143,7 @@ def initreport(manifestjson, ext_dir, ext_type="local"):
                 updatelog("Getting extension name from _locales")
                 # locale_dir = helper.fixpath(ext_dir + '/_locales/')
                 ext_name = GetNameFromManifest(ext_manifest)
-                if ext_name != False and ext_name != "" and ext_name != None:
+                if ext_name is not False and ext_name != "" and ext_name is not None:
                     report["name"] = ext_name
             report["crx"] = ""
             report["extracted"] = ""
@@ -178,7 +178,7 @@ def initreport(manifestjson, ext_dir, ext_type="local"):
                 if "__MSG_" in report["description"]:
                     updatelog("Getting Extension Description from locale")
                     app_desc = GetDescriptionFromManifest(ext_manifest)
-                    if app_desc != False and app_desc != None and app_desc != "":
+                    if app_desc is not False and app_desc is not None and app_desc != "":
                         report["description"] = app_desc
                     else:
                         updatelog("Could not get extension description from locale")

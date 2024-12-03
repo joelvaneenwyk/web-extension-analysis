@@ -338,7 +338,7 @@ class GetLocalExtensions:
                 xpi_manifest = os.path.join(extract_directory, "manifest.json")
                 if os.path.isfile(xpi_manifest):
                     ext_name = core.GetNameFromManifest(xpi_manifest)
-                    if ext_name != False or ext_name != None:
+                    if ext_name is not False or ext_name is not None:
                         # DO shits
                         core.updatelog(
                             xpi_file
