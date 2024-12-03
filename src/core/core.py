@@ -178,7 +178,11 @@ def initreport(manifestjson, ext_dir, ext_type="local"):
                 if "__MSG_" in report["description"]:
                     updatelog("Getting Extension Description from locale")
                     app_desc = GetDescriptionFromManifest(ext_manifest)
-                    if app_desc is not False and app_desc is not None and app_desc != "":
+                    if (
+                        app_desc is not False
+                        and app_desc is not None
+                        and app_desc != ""
+                    ):
                         report["description"] = app_desc
                     else:
                         updatelog("Could not get extension description from locale")

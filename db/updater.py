@@ -36,7 +36,7 @@ import sys
 current_dir = "<current_extanalysis_directory>"
 download_link = "<github_zip_url>"
 temp_dir = tempfile.gettempdir()
-temp_exta_dir = os.path.join(temp_dir, "extanalysis_temp").replace("\\", "\\\\")
+temp_extra_dir = os.path.join(temp_dir, "extanalysis_temp").replace("\\", "\\\\")
 script_path = os.path.join(temp_dir, "update_extanalysis.py").replace("\\", "\\\\")
 last_percent_reported = 0
 
@@ -110,19 +110,19 @@ files_to_copy = ["settings.json", "extanalysis.log", "reports.json"]
 
 # Copy old files and directories
 try:
-    if not os.path.isdir(temp_exta_dir):
+    if not os.path.isdir(temp_extra_dir):
         # Create the temporary directory
-        os.mkdir(temp_exta_dir)
+        os.mkdir(temp_extra_dir)
     else:
         # Previous directory... remove it and create empty one
-        shutil.rmtree(temp_exta_dir)
-        os.mkdir(temp_exta_dir)
+        shutil.rmtree(temp_extra_dir)
+        os.mkdir(temp_extra_dir)
 
     print("\n[i] Copying directories into temporary directory\n")
     for _dir in dirs_to_copy:
         try:
             src = os.path.join(current_dir, _dir).replace("\\", "\\\\")
-            dst = os.path.join(temp_exta_dir, _dir).replace("\\", "\\\\")
+            dst = os.path.join(temp_extra_dir, _dir).replace("\\", "\\\\")
             shutil.copytree(src, dst)
             print("[+] Directory {0} successfully copied!".format(src))
         except Exception as e:
@@ -132,7 +132,7 @@ try:
     for _file in files_to_copy:
         try:
             src = os.path.join(current_dir, _file).replace("\\", "\\\\")
-            dst = os.path.join(temp_exta_dir, _file).replace("\\", "\\\\")
+            dst = os.path.join(temp_extra_dir, _file).replace("\\", "\\\\")
             shutil.copyfile(src, dst)
             print("[+] File {0} successfully copied!".format(src))
         except Exception as e:
@@ -182,7 +182,7 @@ except:
     )
     print(
         "[1] {0}\n[2] {1}\n[3] {2}\n[4] {3}".format(
-            temp_exta_dir,
+            temp_extra_dir,
             extract_location,
             os.path.join(temp_dir, "extanalysis.zip").replace("\\", "\\\\"),
             script_path,
@@ -194,7 +194,7 @@ except:
 
 # Update the new settings file
 new_settings = os.path.join(new_dir, "settings.json").replace("\\", "\\\\")
-old_settings = os.path.join(temp_exta_dir, "settings.json").replace("\\", "\\\\")
+old_settings = os.path.join(temp_extra_dir, "settings.json").replace("\\", "\\\\")
 with open(new_settings, "r") as ns, open(old_settings, "r") as ols:
     news = json.loads(ns.read())
     olds = json.loads(ols.read())
@@ -208,7 +208,7 @@ print("\n[i] Copying your old files\n")
 for _file in files_to_copy:
     try:
         src = os.path.join(current_dir, _file).replace("\\", "\\\\")
-        dst = os.path.join(temp_exta_dir, _file).replace("\\", "\\\\")
+        dst = os.path.join(temp_extra_dir, _file).replace("\\", "\\\\")
         if os.path.isfile(src):
             # delete the file so that we can write the old file (might be a bad idea...)
             os.remove(src)
@@ -221,7 +221,7 @@ print("\n[i] Copying your old directories\n")
 for _dir in dirs_to_copy:
     try:
         src = os.path.join(current_dir, _dir).replace("\\", "\\\\")
-        dst = os.path.join(temp_exta_dir, _dir).replace("\\", "\\\\")
+        dst = os.path.join(temp_extra_dir, _dir).replace("\\", "\\\\")
         if os.path.isdir(src):
             shutil.rmtree(src)
         shutil.copytree(dst, src)
@@ -231,7 +231,7 @@ for _dir in dirs_to_copy:
 
 
 # Cleanup
-dirs_to_clean = [temp_exta_dir, extract_location]
+dirs_to_clean = [temp_extra_dir, extract_location]
 files_to_clean = ["extanalysis.zip"]
 print("\n[i] Initiating clean-up procedure")
 
