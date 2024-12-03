@@ -1,5 +1,7 @@
 
-# `ExtAnalysis` // Web Extension Analysis
+# `ExtAnalysis` - Browser Extension Analysis Framework
+
+> Copyright (C) 2019 - 2022 Tuhinshubhra
 
 <!-- markdownlint-disable no-inline-html !-->
 
@@ -72,15 +74,9 @@ Installing ExtAnalysis is simple! It runs on python3, so make sure `python3` and
 
 ```bash
 git clone https://github.com/Tuhinshubhra/ExtAnalysis
- ```
-
-```bash
 cd ExtAnalysis
- ```
-
-```bash
-pip3 install -r requirements.txt
- ```
+rye sync
+```
 
 For proper analysis don't forget to add your VirusTotal api.
 

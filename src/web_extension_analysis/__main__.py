@@ -209,7 +209,7 @@ def show_analysis(analysis_id):
     return viewResult.view(analysis_id)
 
 
-if __name__ == "__main__":
+def main():
     core.print_logo()
     settings.init_settings()
     main_url = "http://{0}:{1}".format(host, port)
@@ -217,3 +217,7 @@ if __name__ == "__main__":
         webbrowser.open(main_url)
     print("\n[~] Starting ExtAnalysis at: {0} \n\n".format(main_url))
     app.run(host=host, port=port, debug=False)
+
+
+if __name__ == "__main__":
+    main()
