@@ -111,7 +111,7 @@ def init_settings():
                 core.updatelog("Creating lab directory: " + core.lab_path)
                 try:
                     os.mkdir(core.lab_path)
-                except:
+                except IOError:
                     core.updatelog("Something went wrong while creating lab directory!")
                     logging.error(traceback.format_exc())
                     core.handle_exit()
@@ -307,7 +307,7 @@ def update_settings_batch(settings_dict):
 
         for the_setting in settings_dict:
             try:
-                if type(settings[the_setting]) == bool:
+                if type(settings[the_setting]) is bool:
                     # okay settings key is good...
                     if str(settings_dict[the_setting]).lower() == "true":
                         # set to true

@@ -356,7 +356,7 @@ def analyze(ext_name, ext_type="local"):
                 core.updatelog("Virustotal result successfully acquired!")
             try:
                 ip = socket.gethostbyname(domain)
-            except:
+            except ValueError:
                 ip = "unknown"
             if ip != "unknown":
                 ip_info = ip2country.get_country(ip)

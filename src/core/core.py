@@ -170,7 +170,7 @@ def initreport(manifestjson, ext_dir, ext_type="local"):
             try:
                 # non Required values
                 report["author"] = manifestjson["author"]
-            except:
+            except ValueError:
                 report["author"] = "unknown"
                 updatelog("No author name found")
             try:
