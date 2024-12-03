@@ -1,5 +1,5 @@
 
-# Web Extension Analysis
+# `ExtAnalysis` // Web Extension Analysis
 
 <!-- markdownlint-disable no-inline-html !-->
 

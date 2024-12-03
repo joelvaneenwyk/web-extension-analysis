@@ -1,0 +1,11 @@
+version: "0.2"
+ignorePaths: []
+dictionaryDefinitions:
+  - name: web-extension-analysis
+    path: ./.github/config/web-extension-analysis.dict
+    addWords: true
+dictionaries:
+  - web-extension-analysis
+words: []
+ignoreWords: []
+import: []

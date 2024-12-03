@@ -12,8 +12,9 @@ reports.json
 extanalysis.log
 .venv/
 .idea/
-venv
+venv/
 .mypy_cache/
 dist/
 venv/
 .pytest_cache/
+.git/
