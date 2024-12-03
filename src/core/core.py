@@ -29,14 +29,25 @@ import core.helper as helper
 
 ## all the paths
 path = (
-    os.path.dirname(os.path.abspath(__file__)).replace("/core", "").replace("\core", "")
+    os.path.dirname(os.path.abspath(__file__)).replace("/core", "").replace("\\core", "")
 )
 lab_path = helper.fixpath(path + "/lab")
 reports_path = helper.fixpath(path + "/reports")
 
 # Version
-with open(os.path.join(path, "current_version")) as vf:
-    version = vf.read()
+root = path
+while root != None:
+    try:
+        with open(os.path.join(path, "current_version")) as vf:
+            version = vf.read()
+        break
+    except IOError:
+        pass
+
+    try:
+        root = os.path.abspath(os.path.join(root, os.pardir))
+    except:
+        root = None
 
 # All the variables
 quiet = False
