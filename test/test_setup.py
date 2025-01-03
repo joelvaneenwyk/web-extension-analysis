@@ -1,5 +1,3 @@
-
-
 def test_version(client):
     response = client.get("/version/")
 
