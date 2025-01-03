@@ -11,7 +11,6 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -23,13 +22,17 @@ jobs:
       with:
         fetch-depth: 0
 
-    - name: Install the latest version of rye
-      uses: eifinger/setup-rye@v4
+    - name: Install the latest version of uv
+      uses: astral-sh/setup-uv@v5
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        enable-cache: false
+        prune-cache: false
 
     - name: Build
       run: |
-        rye build
+        uv build
 
     - name: Test
       run: |
-        rye test
+        uv run pytest
