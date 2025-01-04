@@ -24,14 +24,11 @@ dev-dependencies = [
     "mypy>=1.14.1",
 ]
 
+[tool.uv.pip]
+universal = true
+
 [tool.hatch.metadata]
 allow-direct-references = true
 
 [tool.hatch.build.targets.wheel]
-packages = [
-    "src/core",
-    "src/db",
-    "src/frontend",
-    "src/main",
-    "src/plugins",
-]
+packages = ["src/core", "src/db", "src/frontend", "src/main", "src/plugins"]
