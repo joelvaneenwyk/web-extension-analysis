@@ -158,7 +158,8 @@ Below is a list of people who contributed to the development of ExtAnalysis (*on
 
 ## Contributors
 
-WebBreacher
+- WebBreacher
+- Nilay Nath Sharan
 
 ## License and Credits
 
