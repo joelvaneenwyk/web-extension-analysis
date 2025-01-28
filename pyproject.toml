@@ -3,7 +3,13 @@ name = "web-extension-analysis"
 version = "1.0.5"
 description = "Browser extension analysis framework"
 authors = [{ name = "Tuhinshubhra", email = "tuhin@r3d.ninja" }]
-dependencies = ["flask", "python-whois", "requests", "maxminddb", "Flask-WTF"]
+dependencies = [
+    "flask>=3.0.3",
+    "flask-wtf>=1.2.1",
+    "maxminddb>=2.6.2",
+    "python-whois>=0.9.5",
+    "requests>=2.32.3",
+]
 readme = "README.md"
 requires-python = ">= 3.8"
 
@@ -17,12 +23,7 @@ analyze-extensions = "core.__main__:main"
 
 [tool.uv]
 managed = true
-dev-dependencies = [
-    "pytest>=8.2.1",
-    "ruff>=0.8.1",
-    "pytest-flask>=1.3.0",
-    "mypy>=1.14.1",
-]
+link-mode = "copy"
 
 [tool.uv.pip]
 universal = true
@@ -32,3 +33,13 @@ allow-direct-references = true
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/core", "src/db", "src/frontend", "src/main", "src/plugins"]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.2.1",
+    "ruff>=0.8.1",
+    "pytest-flask>=1.3.0",
+    "mypy>=1.14.1",
+    "pylint>=3.2.7",
+    "isort>=5.13.2",
+]
