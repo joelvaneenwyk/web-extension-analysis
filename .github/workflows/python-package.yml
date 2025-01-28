@@ -22,12 +22,10 @@ jobs:
       with:
         fetch-depth: 0
 
-    - name: Install the latest version of uv
+    - name: Install Python
       uses: astral-sh/setup-uv@v5
       with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        enable-cache: false
-        prune-cache: false
+        python-version: ${{ matrix.python-version }}
 
     - name: Build
       run: |
