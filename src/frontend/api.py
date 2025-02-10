@@ -128,7 +128,7 @@ def view(query, allargs):
                 lexts = localextensions.GetLocalExtensions()
                 exts = ""
                 exts = lexts.googlechrome()
-                if exts != False and exts != [] and exts != None:
+                if exts is not False and exts != [] and exts is not None:
                     return_html = "<table class='result-table' id='result-table'><thead><tr><th>Extension Name</th><th>Action</th></tr></thead><tbody>"
                     for ext in exts:
                         ext_info = ext.split(',')
@@ -144,7 +144,7 @@ def view(query, allargs):
                 import core.localextensions as localextensions
                 lexts = localextensions.GetLocalExtensions()
                 exts = lexts.firefox()
-                if exts != False and exts != [] and exts != None:
+                if exts is not False and exts != [] and exts is not None:
                     return_html = "<table class='result-table' id='result-table'><thead><tr><th>Extension Name</th><th>Action</th></tr></thead><tbody>"
                     for ext in exts:
                         ext_info = ext.split(',')
@@ -161,7 +161,7 @@ def view(query, allargs):
                 lexts = localextensions.GetLocalExtensions()
                 exts = ""
                 exts = lexts.braveLocalExtensionsCheck()
-                if exts != False and exts != [] and exts != None:
+                if exts is not False and exts != [] and exts is not None:
                     return_html = "<table class='result-table' id='result-table'><thead><tr><th>Extension Name</th><th>Action</th></tr></thead><tbody>"
                     for ext in exts:
                         ext_info = ext.split(',')

@@ -366,7 +366,7 @@ def analyze(ext_name, ext_type='local'):
                 core.updatelog('Something went wrong while deleting extraction directory: ' + str(e))
                 logging.error(traceback.format_exc())
         """
-        if cid != False and cid != None:
+        if cid is not False and cid is not None:
             return ('Extension analyzed and report saved under ID: ' + cid)
         else:
             return ('error:Something went wrong with the analysis!')
