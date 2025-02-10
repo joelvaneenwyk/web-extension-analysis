@@ -57,7 +57,7 @@ def view(analysis_id):
                 error_head="Missing Graph File for Result ID: {0}".format(analysis_id),
                 error_txt='ExtAnalysis could not find "grpah.data" file in the analysis report directory! Please re-analyze the extension',
             )
-    except:
+    except Exception:
         error_txt = "There seems to be no result corresponding to the provided ID. Did you delete the result? or maybe you did some weird shit with the parameter?"
         return render_template(
             "error.html",

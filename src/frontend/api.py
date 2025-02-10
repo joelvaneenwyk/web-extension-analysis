@@ -308,7 +308,7 @@ def view(query, allargs):
             else:
                 # ranalysis[1] is the error msg when ranalysis[0] = False
                 return ('error: ' + ranalysis[1])
-        except:
+        except Exception:
             logging.error(traceback.format_exc())
             return ('error: Malformed api call')
 
@@ -343,7 +343,7 @@ def view(query, allargs):
             else:
                 # ranalysis[1] is the error msg when ranalysis[0] = False
                 return ('error: ' + ranalysis[1])
-        except:
+        except Exception:
             logging.error(traceback.format_exc())
             return ('error: Malformed api call')
 
@@ -357,7 +357,7 @@ def view(query, allargs):
             domain = allargs.get('domain')
             try:
                 import whois
-            except:
+            except Exception:
                 return (
                     "error: python-whois module not installed! install it using `pip3 install python-whois` or `pip3 install -r requirements.txt`")
             whois_result = whois.whois(domain)
@@ -481,7 +481,7 @@ def view(query, allargs):
                     return ('error: ' + change[1])
             else:
                 return ('error: Invalid directory path!')
-        except:
+        except Exception:
             logging.error(traceback.format_exc())
             return ('error: Invalid request for directory change!')
 
@@ -498,7 +498,7 @@ def view(query, allargs):
                 return (change[1])
             else:
                 return ('error: ' + change[1])
-        except:
+        except Exception:
             logging.error(traceback.format_exc())
             return ('error: Invalid request!')
 
@@ -520,7 +520,7 @@ def view(query, allargs):
                     return ('error: ' + change[1])
             else:
                 return ('error: Invalid directory path!')
-        except:
+        except Exception:
             logging.error(traceback.format_exc())
             return ('error: Invalid request for directory change!')
 
@@ -559,7 +559,7 @@ def view(query, allargs):
             else:
                 return (
                     'error: Invalid response from "update_settings_batch". please report it here: https://github.com/Tuhinshubhra/ExtAnalysis/issues/new')
-        except:
+        except Exception:
             logging.error(traceback.format_exc())
             return ('error: Incomplete Request!')
 

@@ -97,7 +97,7 @@ def view(analysis_id, file_id):
                     + str(e),
                 )
 
-        except:
+        except Exception:
             return render_template(
                 "error.html",
                 error_title="Invalid File ID",

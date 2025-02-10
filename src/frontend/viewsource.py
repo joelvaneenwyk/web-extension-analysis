@@ -49,7 +49,7 @@ def view(url):
                 + scstat[1],
             )
 
-    except:
+    except Exception:
         logging.error(traceback.format_exc())
         return render_template(
             "error.html",

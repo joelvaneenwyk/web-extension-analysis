@@ -162,7 +162,7 @@ print("\n[i] Copying new version to old location...")
 try:
     copy_tree(new_dir, current_dir)
     print("[+] Copy successful!")
-except:
+except Exception:
     # Manual instruction
     logging.error(traceback.format_exc())
     print(

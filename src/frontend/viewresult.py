@@ -385,7 +385,7 @@ def view(analysis_id):
                     error_txt=error_txt,
                 )
 
-    except:
+    except Exception:
         logging.error(traceback.format_exc())
         return render_template(
             "error.html",

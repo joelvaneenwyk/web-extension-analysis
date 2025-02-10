@@ -52,7 +52,7 @@ def get_country(ip):
             )
             logging.error(traceback.format_exc())
             return [False, str(e)]
-    except:
+    except Exception:
         core.updatelog(
             "maxminddb module not installed! Using online service to get Country from IP"
         )

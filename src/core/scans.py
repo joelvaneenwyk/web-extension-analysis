@@ -39,7 +39,7 @@ def geoip(ip):
             if lookup["error"]:
                 core.updatelog("Geo-IP Lookup failed: " + lookup["reason"])
                 return [False, lookup["reason"]]
-        except:
+        except Exception:
             core.updatelog("Geo-IP Lookup successful")
             return [True, lookup]
     except Exception as e:

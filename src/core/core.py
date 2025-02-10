@@ -189,7 +189,7 @@ def initreport(manifestjson, ext_dir, ext_type="local"):
                         report["description"] = app_desc
                     else:
                         updatelog("Could not get extension description from locale")
-            except:
+            except Exception:
                 report["description"] = "unknown"
                 updatelog("No author name found")
             return True
