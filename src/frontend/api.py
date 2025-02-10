@@ -22,7 +22,6 @@ import logging
 import os
 import traceback
 
-
 import core.analyze as analysis
 import core.core as core
 import core.downloader as download_extension
