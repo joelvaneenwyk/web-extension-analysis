@@ -304,7 +304,7 @@ def analyze(ext_name, ext_type='local'):
         for url in urls:
             core.updatelog('Found URL: ' + url['url'])
             domain = re.findall(
-                '^(?:https?:\/\/)?(?:[^@\/\\n]+@)?(?:www\.)?([^:\/?\\n]+)', url['url'])[0]
+                r'^(?:https?:\/\/)?(?:[^@\/\\n]+@)?(?:www\.)?([^:\/?\\n]+)', url['url'])[0]
             url['domain'] = domain
             core.report['urls'].append(url)  # add url to the report file
             domains.append(domain)
