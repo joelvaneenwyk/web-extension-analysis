@@ -16,24 +16,13 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
+import re
+import urllib.request
 from pathlib import Path
 from typing import Optional
-import urllib.request
+from urllib.parse import parse_qsl, urlparse
 
 import core.core as core
-import core.helper as helper
-import re
-from urllib.parse import parse_qsl, urlparse, parse_qs
-
-
-from pathlib import Path
-import urllib.request
-
-
-import urllib.request
-from pathlib import Path
-import re
-from typing import Optional
 
 
 class ExtensionDownloader:
@@ -172,4 +161,3 @@ class ExtensionDownloader:
         except Exception as e:
             core.updatelog(f'Error downloading Edge extension: {str(e)}')
             return None
-

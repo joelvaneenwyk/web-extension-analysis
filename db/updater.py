@@ -21,17 +21,17 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 # This is the updater script for ExtAnalysis
 
+import json
+import logging
+import os
+import shutil
+import sys
+import tempfile
+import time
+import traceback
 import urllib.request
 import zipfile
-import os
 from distutils.dir_util import copy_tree
-import shutil
-import tempfile
-import json
-import time
-import logging
-import traceback
-import sys
 
 current_dir = "<current_extanalysis_directory>"
 download_link = "<github_zip_url>"

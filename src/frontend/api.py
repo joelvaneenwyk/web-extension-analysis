@@ -16,17 +16,18 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
-import core.core as core
-import core.helper as helper
-import core.analyze as analysis
-import core.downloader as download_extension
-import os
-import json
-from flask import Flask, request, render_template, redirect, url_for, send_from_directory
-import logging
-import traceback
-import core.scans as scan
 import base64
+import json
+import logging
+import os
+import traceback
+
+
+import core.analyze as analysis
+import core.core as core
+import core.downloader as download_extension
+import core.helper as helper
+import core.scans as scan
 
 
 def view(query, allargs):
@@ -38,7 +39,7 @@ def view(query, allargs):
                 saveas = allargs.get('savedir')
                 if saveas == "" or saveas == " ":
                     saveas = extension_id
-            except Exception as e:
+            except Exception:
                 print('Save name not specified')
             try:
                 downloader = download_extension.ExtensionDownloader()
@@ -404,7 +405,7 @@ def view(query, allargs):
                 # in case of geo_ip[0] being false element 1 has the error msg
                 return ('error: ' + geo_ip[1])
 
-        except Exception as e:
+        except Exception:
             logging.error(traceback.format_exc())
             return ('error: Invalid Query')
 
@@ -429,7 +430,7 @@ def view(query, allargs):
                 return ('<center><h4>Showing HTTP Headers of: {0}</h4></center><br>{1}'.format(url, rethtml))
             else:
                 return ('error: ' + headers_status[1])
-        except Exception as e:
+        except Exception:
             logging.error(traceback.format_exc())
             return ('error: Invalid Query')
 
@@ -452,7 +453,7 @@ def view(query, allargs):
                 return ('<center><h4>Source Code of: {0}</h4></center><br>{1}'.format(rurl, rethtml))
             else:
                 return ('error: ' + headers_status[1])
-        except Exception as e:
+        except Exception:
             logging.error(traceback.format_exc())
             return ('error: Invalid Query')
 

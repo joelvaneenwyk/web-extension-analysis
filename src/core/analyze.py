@@ -15,22 +15,23 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
-import os
-import zipfile
-import tarfile
-import re
-import core.core as core
+
 import json
-from pathlib import Path
-import traceback
 import logging
+import os
+import re
 import shutil
-import core.result as saveresult
-import core.helper as helper
 import socket
-import core.virustotal as virustotal
+import tarfile
+import traceback
+import zipfile
+
+import core.core as core
+import core.helper as helper
 import core.intel as intel
 import core.ip2country as ip2country
+import core.result as saveresult
+import core.virustotal as virustotal
 
 
 def sort_files(extension_dir):
@@ -81,7 +82,7 @@ def analyze(ext_name, ext_type='local'):
     # extension_extracted = False
     if ext_name.endswith('.crx') or ext_name.endswith('.xpi') or ext_name.endswith('.zip') or ext_name.endswith('.tar') or ext_name.endswith('.gzip'):
         '''
-        EXTENSION NAME / PACKED PATH 
+        EXTENSION NAME / PACKED PATH
         UNZIP THE EXTENSION FOR FURTHER ANALYSIS
         '''
 
@@ -113,7 +114,7 @@ def analyze(ext_name, ext_type='local'):
             extract_dir = helper.fixpath(core.lab_path + '/' + ext_name)
         else:
             '''
-            Only the extension name is sent.. 
+            Only the extension name is sent.
             In this case we assume that the extension is located inside the lab directory.
             Used while scanning an uploaded or downloaded extension
             '''
