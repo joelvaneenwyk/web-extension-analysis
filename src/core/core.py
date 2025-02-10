@@ -27,23 +27,25 @@ import traceback
 
 import core.helper as helper
 
-# Version
-parent = os.path.dirname(os.path.abspath(__file__))
-root = None
-version = None
-while version is None:
-    try:
-        with open(os.path.join(parent, "current_version")) as vf:
-            version = vf.read()
-            root = parent
-    except IOError:
-        pass
 
-    parent = os.path.abspath(os.path.join(parent, os.pardir))
-version = version or "0.0.0"
+# Version
+def _get_version_data():
+    parent = os.path.dirname(os.path.abspath(__file__))
+    root = None
+    version = None
+    while version is None:
+        try:
+            with open(os.path.join(parent, "current_version")) as vf:
+                version = vf.read()
+                root = parent
+        except IOError:
+            pass
+
+        parent = os.path.abspath(os.path.join(parent, os.pardir))
+    return version or "0.0.0", root or parent
 
 ## all the paths
-path = root
+version, path = _get_version_data()
 lab_path = helper.fixpath(path + "/lab")
 reports_path = helper.fixpath(path + "/reports")
 
@@ -55,11 +57,12 @@ report = {}  #'{"name":"","version":"","author":"","permissions":[{"name":"","de
 reportids = {}
 virustotal_api = ""
 ignore_css = True
-github_repo = "https://github.com/Tuhinshubhra/ExtAnalysis"
-github_zip = "https://github.com/Tuhinshubhra/ExtAnalysis/archive/master.zip"
-version_url = (
-    "https://raw.githubusercontent.com/Tuhinshubhra/ExtAnalysis/master/current_version"
-)
+github_owner = "Tuhinshubhra"
+github_repo_name = "ExtAnalysis"
+github_repo_branch = "master"
+github_repo = f"https://github.com/{github_owner}/{github_repo_name}"
+github_zip = f"{github_repo}/archive/{github_repo_branch}.zip"
+version_url = f"https://raw.githubusercontent.com/{github_owner}/{github_repo_name}/{github_repo_branch}/current_version"
 
 # settings for intel extraction! DO NOT EDIT HERE! use the settings.json instead
 extract_comments = True
@@ -72,18 +75,18 @@ extract_ipv6_addresses = True
 report_index = os.path.join(path, "reports.json")
 settings_file = helper.fixpath(path + "/settings.json")
 log_file = helper.fixpath(path + "/extanalysis.log")
-
-
-def print_logo():
-    logo = """
+logo = f"""
      _____     _   _____         _         _
     |   __|_ _| |_|  _  |___ ___| |_ _ ___|_|___
     |   __|_'_|  _|     |   | .'| | | |_ -| |_ -|
     |_____|_,_|_| |__|__|_|_|__,|_|_  |___|_|___|
     => Browser Extension Analysis |___| Framework
-    => Version {0} By r3dhax0r
+    => Version {version} By r3dhax0r
 
-    """.format(version)
+    """
+
+
+def print_logo():
     print(logo)
 
 
