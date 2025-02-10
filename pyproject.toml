@@ -19,6 +19,7 @@ build-backend = "hatchling.build"
 
 [project.scripts]
 extanalysis = "core.__main__:main"
+ext-analysis = "core.__main__:main"
 analyze-extensions = "core.__main__:main"
 
 [tool.uv]
